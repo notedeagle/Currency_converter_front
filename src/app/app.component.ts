@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
     this.value = document.getElementById('toggleButton').textContent;
 
-    if(this.value === "to PLN") {
+    if(this.value === "Mode to PLN") {
       this.toPln(currencyForm)
     } else {
       this.fromPln(currencyForm)
