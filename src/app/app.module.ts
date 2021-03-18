@@ -6,6 +6,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CurrencyService } from './currency.service';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CurrencyService } from './currency.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTableModule
   ],
   providers: [CurrencyService],
   bootstrap: [AppComponent]

@@ -10,41 +10,26 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-
-html {
-font-size: 20px;
-}
-
+  
 .panel {
-background: #333333;
+background: #333335;
 border: solid white;
 }
 
 .results {
 font-size: 1em;
 color: #FFFFFF;
-}
-
-.dropdown {
-margin-bottom: 50px;
-}
-
-.inline-block {
-display: inline-block;
-}
-
-.center {
-width: 90%;
-margin: 0 auto 30px;
+text-align-last: center;
 }
 
 input {
-   text-align:center;
+   text-align: center;
 }
 
 select { 
-  text-align-last:center;
-  }
+  text-align-last: center;
+}
+
 </style>
 
 </head>
@@ -86,6 +71,25 @@ select {
           </div>
         </form>
         <p id="result" class="results"></p>
+      </div>
+      <button id="showBtn" (click)="showTable()" class="btn btn-primary">Show/Hide table</button>
+      <div *ngIf="show">
+        <table class="table">
+          <thead>
+            <tr class="results" >
+              <th scope="col">Currency</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Effective Date</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let allCurrency of allCurrency$" class="results">
+            <tr *ngFor="let rate of allCurrency.rates">
+              <td>{{ rate.code }}</td>
+              <td>{{ rate.mid }}</td>
+              <td>@{{ allCurrency.effectiveDate }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
