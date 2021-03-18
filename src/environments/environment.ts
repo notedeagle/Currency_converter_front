@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://my-currency-converter-spring.herokuapp.com/currency'
+  apiBaseUrl: 'http://localhost:8080/currency'
 };
 
 /*

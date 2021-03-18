@@ -15,12 +15,25 @@ export class AppComponent implements OnInit {
   public allCurrency$: AllCurrency[];
   public currency$: Currency;
 
+  public show: boolean = false;
+  public showBtn: any = 'Show';
+
   value: string;
 
   constructor(private currencyService: CurrencyService) {}
 
   ngOnInit() {
     this.getAllCurrency();
+  }
+
+  showTable() {
+    this.show = !this.show;
+
+    // CHANGE THE NAME OF THE BUTTON.s
+    if(this.show)  
+      this.showBtn = "Hide";
+    else
+      this.showBtn = "Show";
   }
 
   public checkMode(currencyForm: FormGroup) {
