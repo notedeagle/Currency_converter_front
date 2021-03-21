@@ -5,13 +5,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CurrencyService } from './currency.service';
+import { CurrencyService } from './converter/currency.service';
 import {MatTableModule} from '@angular/material/table';
-
+import { LoginComponent } from './login/login.component';
+import { ConverterComponent } from './converter/converter.component'
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    ConverterComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,7 @@ import {MatTableModule} from '@angular/material/table';
     MatButtonToggleModule,
     MatTableModule
   ],
-  providers: [CurrencyService],
+  providers: [CurrencyService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

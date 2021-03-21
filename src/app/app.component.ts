@@ -1,78 +1,32 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { AllCurrency, Rate } from './allCurrency';
-import { Currency } from './currency';
-import { CurrencyService } from './currency.service';
+import { relativeToRootDirs } from '@angular/compiler-cli/src/transformers/util';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TokenStorageService } from './_services/token-storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
 export class AppComponent implements OnInit {
-  public allCurrency$: AllCurrency[];
-  public currency$: Currency;
+  isLoggedIn = false;
 
-  public show: boolean = false;
-  public showBtn: any = 'Show';
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private router: Router) { }
 
-  value: string;
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-  constructor(private currencyService: CurrencyService) {}
-
-  ngOnInit() {
-    this.getAllCurrency();
-  }
-
-  showTable() {
-    this.show = !this.show;
-
-    // CHANGE THE NAME OF THE BUTTON.s
-    if(this.show)  
-      this.showBtn = "Hide";
-    else
-      this.showBtn = "Show";
-  }
-
-  public checkMode(currencyForm: FormGroup) {
-
-    this.value = document.getElementById('toggleButton').textContent;
-
-    if(this.value === "Mode to PLN") {
-      this.toPln(currencyForm)
+    if(this.isLoggedIn) {
+      this.router.navigate(['converter']);
     } else {
-      this.fromPln(currencyForm)
+      this.router.navigate['login'];
     }
   }
 
-  public getAllCurrency(): void {
-    this.currencyService.getAllCurrency().subscribe(
-      (response: AllCurrency[]) => {
-        this.allCurrency$ = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    )
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
-
-  public toPln(currencyForm: FormGroup) {
-     this.currencyService.getValueToPln(currencyForm.value.code, currencyForm.value.quantity).subscribe(
-       (response: Currency) => {
-         this.currency$ = response;
-         document.getElementById('result').textContent = this.currency$.result + " PLN"; 
-       }
-     )
-  }
-
-  public fromPln(currencyForm: FormGroup) {
-    this.currencyService.getValueFromPln(currencyForm.value.code, currencyForm.value.quantity).subscribe(
-      (response: Currency) => {
-        this.currency$ = response;
-        document.getElementById('result').textContent = this.currency$.result + " " + this.currency$.code; 
-      }
-    )
- }
 }
