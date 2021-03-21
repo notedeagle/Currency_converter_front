@@ -14,14 +14,14 @@ export class CurrencyService {
     constructor(private http: HttpClient) {}
 
     public getAllCurrency(): Observable<AllCurrency[]> {
-        return this.http.get<AllCurrency[]>(`${this.apiServerUrl}/all/currency/`);
+        return this.http.get<AllCurrency[]>(`${this.apiServerUrl}/currency/all/`);
     }
 
     public getValueFromPln(currency: string, quantity: string): Observable<Currency> {
-        return this.http.get<Currency>(`${this.apiServerUrl}currency/from/${currency}/${quantity}`);
+        return this.http.get<Currency>(`${this.apiServerUrl}/currency/from/${currency}/${quantity}`);
     }
 
     public getValueToPln(currency: string, quantity: string): Observable<Currency> {
-        return this.http.get<Currency>(`${this.apiServerUrl}currency/to/${currency}/${quantity}`);
+        return this.http.get<Currency>(`${this.apiServerUrl}/currency/to/${currency}/${quantity}`);
     }
 }
