@@ -85,7 +85,7 @@ select {
           <tbody *ngFor="let allCurrency of allCurrency$" class="results">
             <tr *ngFor="let rate of allCurrency.rates">
               <td>{{ rate.code }} - {{ rate.currency }}</td>
-              <td>{{ rate.mid }}</td>
+              <td>1 {{ rate.code }} = {{ rate.mid }} PLN</td>
               <td>{{ allCurrency.effectiveDate }}</td>
             </tr>
           </tbody>
